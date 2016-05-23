@@ -14,6 +14,7 @@ local menubar = require("menubar")
 -- Load Debian menu entries
 require("debian.menu")
 require("volume")
+require("brightness")
 require("battery")
 local volume_widget = create_volume_widget()
 local battery_widget = create_battery_widget()
@@ -286,7 +287,11 @@ globalkeys = awful.util.table.join(
     -- Custom stuff
     awful.key({ }, "XF86AudioRaiseVolume", function () inc_volume(volume_widget) end),
     awful.key({ }, "XF86AudioLowerVolume", function () dec_volume(volume_widget) end),
-    awful.key({ }, "XF86AudioMute", function() mute_volume(volume_widget) end)
+    awful.key({ }, "XF86AudioMute", function() mute_volume(volume_widget) end),
+
+    awful.key({ }, "XF86MonBrightnessUp", up_brightness),
+    awful.key({ }, "XF86MonBrightnessDown", down_brightness)
+
 )
 
 clientkeys = awful.util.table.join(

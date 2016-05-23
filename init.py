@@ -33,13 +33,10 @@ def install_conf(conf):
         dest.symlink_to(source)
 
 
-class App:
-    def install(self):
-        print('Installing %s' % self.__class__.__name__)
-        self._install()
-
-    def _install(self):
-        raise NotImplementedError
+def desktop_enable_app(appname):
+    app = '/etc/xdg/autostart/%s.desktop' % appname
+    if runcmd("grep '^OnlyShowIn=.*Awesome;$' %s" % app) != 0:
+        runcmd("sudo sed  -is 's/OnlyShowIn=Awesome;/OnlyShowIn=/' %s" % app)
 
 
 # install good stuff
@@ -54,7 +51,10 @@ print(' ✓')
 
 print(' * awesome', end='', flush=True)
 if runcmd('which awesome > /dev/null') != 0:
-    install('awesome')
+    install_package('awesome')
+desktop_enable_app('gnome-keyring-*')
+desktop_enable_app('gnome-sound-panel')
+desktop_enable_app('gnome-power-panel')
 install_conf('.config/awesome')
 print(' ✓')
 

@@ -13,6 +13,10 @@ local menubar = require("menubar")
 
 -- Load Debian menu entries
 require("debian.menu")
+require("volume")
+require("battery")
+local volume_widget = create_volume_widget()
+local battery_widget = create_battery_widget()
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -195,7 +199,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(battery_widget) -- custom battery
     right_layout:add(mytextclock)
+    right_layout:add(volume_widget) -- custom volume
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -275,7 +281,12 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    -- Custom stuff
+    awful.key({ }, "XF86AudioRaiseVolume", function () inc_volume(volume_widget) end),
+    awful.key({ }, "XF86AudioLowerVolume", function () dec_volume(volume_widget) end),
+    awful.key({ }, "XF86AudioMute", function() mute_volume(volume_widget) end)
 )
 
 clientkeys = awful.util.table.join(
@@ -451,4 +462,4 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.util.spawn_with_shell("$HOME/.config/awesome/bootstrap.should")
+awful.util.spawn_with_shell("$HOME/.config/awesome/bootstrap.sh")

@@ -7,6 +7,7 @@ Battery 0: Charging, 99%, charging at zero rate - will never fully charge.
 Battery 0: Unknown, 99%
 Battery 0: Discharging, 99%, 02:21:23 remaining
 Battery 0: Discharging, 99%, discharging at zero rate - will never fully discharge.
+Battery 0: Full, 100%
 ]]--
 
 

@@ -27,10 +27,10 @@
  end
  
  -- Updates the volume widget's display
- function update_volume(widget)
+ function update_volume_widget(widget)
      local volume = get_volume()
      local mute = get_mute()
- 
+
      -- color
      color = normal_color
      bg_color = background_color
@@ -40,31 +40,50 @@
          volume = volume % 1
      end
      color = (mute and mute_color) or color
- 
+
      widget:set_color(color)
      widget:set_background_color(bg_color)
  
      widget:set_value(volume)
  end
- 
+
+-- Set the given volume to all the sinks
+function set_volume(volume)
+     awful.util.spawn_with_shell(
+          "pactl list sinks | grep Sink | sed -s 's/Sink #//' |" ..
+          " xargs -I SINK pactl set-sink-volume SINK " ..
+          tostring(volume * 100) .. "%")
+end
+
+-- Mute all the sinks
+function toggle_mute()
+     awful.util.spawn_with_shell(
+          "pactl list sinks | grep Sink | sed -s 's/Sink #//' |" ..
+          " xargs -I %% pactl set-sink-mute %% toggle")
+end
+
  -- Volume control functions for external use
  function inc_volume(widget)
-     local volume = get_volume()
+     local volume = get_volume() + 0.03
      if volume >= 2 then
-          return
+          volume = 2
      end
-     awful.util.spawn("pactl set-sink-volume 0 +3%", false)
-     update_volume(widget)
+     set_volume(volume)
+     update_volume_widget(widget)
  end
  
  function dec_volume(widget)
-     awful.util.spawn("pactl set-sink-volume 0 -3%", false)
-     update_volume(widget)
+     local volume = get_volume() - 0.03
+     if volume < 0 then
+          volume = 0
+     end
+     set_volume(volume)
+     update_volume_widget(widget)
  end
  
  function mute_volume(widget)
-     awful.util.spawn("pactl set-sink-mute 0 toggle", false)
-     update_volume(widget)
+     toggle_mute()
+     update_volume_widget(widget)
  end
  
  function create_volume_widget()
@@ -75,11 +94,11 @@
      volume_widget:set_border_color('#666666')
  
      -- Init the widget
-     update_volume(volume_widget)
+     update_volume_widget(volume_widget)
  
      -- Update the widget on a timer
      mytimer = timer({ timeout = 1 })
-     mytimer:connect_signal("timeout", function () update_volume(volume_widget) end)
+     mytimer:connect_signal("timeout", function () update_volume_widget(volume_widget) end)
      mytimer:start()
  
      return volume_widget

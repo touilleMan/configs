@@ -11,6 +11,10 @@ alias -s txt="nano "
 alias -s avi="vlc "
 alias -s mkv="vlc "
 
+alias -s jpg="eom "
+alias -s jpeg="eom "
+alias -s png="eom "
+
 alias clean='find . -name "*~" -delete -print'
 alias prince='dosbox -c "cd PRINCE" -c "PRINCE.EXE"'
 alias prince2='dosbox -c "cd PRINCOP2" -c "PRINCE.EXE"'
@@ -19,17 +23,14 @@ alias duke='cd ~/.eduke32/ && ./eduke32'
 
 alias fullgit='git fetch && git stash && git rebase && git stash pop'
 
-alias soulsave=$HOME/.soulSaver/soulsave.sh
-alias souladd=$HOME/.soulSaver/souladd.sh
-
-alias movget=$HOME/.scripts/movget.sh
-
 alias todo2='todo2 --file=$HOME/.config/todo2'
 
 alias tc='truecrypt ~/Documents/.emmanuel_crypted_big.tc ~/tc'
 alias tck='truecrypt -d && touch ~/Documents/.emmanuel_crypted_big.tc'
 
 alias httpserver='twistd -no web --path=. -p 8000'
+
+alias web='chromium-browser'
 
 # add custom script to program list
 export PATH="$PATH:$HOME/.scripts"
@@ -45,3 +46,8 @@ export PATH="$PATH:$HOME/.config/npm/bin"
 export PYTHONSTARTUP=$HOME/.config/python_shell_conf.py
 
 export PATH=$HOME/.config/bin:$PATH
+
+alias godot=$HOME/.godot/godot
+
+# finally colour output for gcc !
+export GCC_COLORS=yes

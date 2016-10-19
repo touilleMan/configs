@@ -4,12 +4,13 @@ from subprocess import call
 from pathlib import Path
 import os
 
+
 SRC_DIR=Path(os.path.abspath(os.path.dirname(__file__) + '/data'))
 DEST_DIR=Path(os.environ['HOME'])
 
 
 def install_package(package):
-    if hasattr(package, '__iter__'):
+    if isinstance(package, (list, tuple)):
         package = ' '.join(package)
     cmd = 'sudo apt-get install %s' % package
     print('=> install %s' % package)
@@ -65,6 +66,9 @@ print(' ✓')
 print(' * scripts dir', end='', flush=True)
 install_conf('.scripts')
 print(' ✓')
+
+runcmd('git config --global user.email "emmanuel.leblond@gmail.com"')
+runcmd('git config --global user.name "Emmanuel Leblond"')
 
 print("""
 *** TODO ***

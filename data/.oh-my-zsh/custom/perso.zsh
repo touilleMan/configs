@@ -51,3 +51,5 @@ alias godot=$HOME/.godot/godot
 
 # finally colour output for gcc !
 export GCC_COLORS=yes
+
+alias wifuck='sudo systemctl restart network-manager.service'

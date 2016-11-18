@@ -1,0 +1,16 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Anaconda",
+		"Clang Format",
+		"EditorConfig",
+		"Package Control",
+		"Restructured Text (RST) Snippets",
+		"SublimeLinter",
+		"SublimeLinter-contrib-clang"
+	]
+}

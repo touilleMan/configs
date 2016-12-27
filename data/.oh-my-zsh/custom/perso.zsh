@@ -53,3 +53,8 @@ alias godot=$HOME/.godot/godot
 export GCC_COLORS=yes
 
 alias wifuck='sudo systemctl restart network-manager.service'
+
+# Stop closing term with ^D
+set -o ignoreeof
+
+alias mkvenv='virtualenv -p /usr/bin/python3 venv && . ./venv/bin/activate'

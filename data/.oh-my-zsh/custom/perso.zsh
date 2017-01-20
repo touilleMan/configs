@@ -58,3 +58,6 @@ alias wifuck='sudo systemctl restart network-manager.service'
 set -o ignoreeof
 
 alias mkvenv='virtualenv -p /usr/bin/python3 venv && . ./venv/bin/activate'
+alias venv='. ./venv/bin/activate'
+alias vpn='cd ~/.config/vpn && sudo ./airvpn_linux_x64_portable/airvpn'
+alias upy=~/projects/micropython/unix/micropython

@@ -1,0 +1,7 @@
+[user]
+	email = emmanuel.leblond@gmail.com
+	name = Emmanuel Leblond
+[push]
+	default = simple
+[commit]
+	gpgsign = true

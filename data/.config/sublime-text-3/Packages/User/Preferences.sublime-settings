@@ -1,7 +1,8 @@
 {
 	"always_show_minimap_viewport": true,
 	"color_scheme": "Packages/User/SublimeLinter/Solarized (Light) (SL).tmTheme",
-	"font_size": 11,
+	"dictionary": "Packages/Language - French - Français/fr_FR (1990 reform).dic",
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"Vintage"

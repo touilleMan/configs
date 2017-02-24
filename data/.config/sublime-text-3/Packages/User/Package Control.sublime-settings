@@ -6,9 +6,13 @@
 	"installed_packages":
 	[
 		"Anaconda",
+		"Better CoffeeScript",
 		"Clang Format",
 		"EditorConfig",
+		"Floobits",
+		"Language - French - Français",
 		"Package Control",
+		"Protobuf Syntax Hightlighting",
 		"Restructured Text (RST) Snippets",
 		"SublimeLinter",
 		"SublimeLinter-contrib-clang"

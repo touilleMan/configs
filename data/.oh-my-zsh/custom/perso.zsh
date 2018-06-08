@@ -1,5 +1,7 @@
-# Put your fun stuff here.
-eval `gnome-keyring-daemon --start`
+# Put your fun stuff here.eval
+`gnome-keyring-daemon --start`
+
+#export EDITOR='subl -n -w'
 
 alias ul='ls --color=auto --classify -lh'
 alias ua='ls --color=auto --classify -a'
@@ -36,6 +38,7 @@ alias web='chromium-browser'
 export PATH="$PATH:$HOME/.scripts"
 # export PYTHONPATH=/usr/local/lib/python2.7/dist-packages
 export GOPATH=$HOME/.gopath
+export PATH="$PATH:$HOME/projects/go/bin"
 export PATH=$PATH:$HOME/.config/delation
 
 ### Added by the Heroku Toolbelt
@@ -62,3 +65,6 @@ alias venv='. ./venv/bin/activate'
 
 alias vpn='cd ~/.config/vpn && sudo ./airvpn_linux_x64_portable/airvpn'
 alias upy=~/projects/micropython/unix/micropython
+
+alias tdp="td n '[PARSEC]' $@"
+alias httpserver="twistd -no web --path=."

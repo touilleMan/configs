@@ -136,7 +136,7 @@ def fish():
 def fisherman():
     if not DRY_RUN:
         print(' * fisherman plugins', end='', flush=True)
-    runcmd('fish -c "fisher install vibrant git_porcelain bass"')
+    runcmd('fish -c "fisher add vibrant git_porcelain bass"')
     if not DRY_RUN:
         print(' ✓')
 

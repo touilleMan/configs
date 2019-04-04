@@ -1,7 +1,12 @@
 #set fish_greeting ""
-set -g fish_user_paths $fish_user_paths /snap/bin
 
-set -gx PATH $HOME/.scripts $PATH
+if [ -d "/snap/bin" ]
+  set -g fish_user_paths $fish_user_paths /snap/bin
+end
+
+if [ -d "$HOME/.scripts" ]
+  set -gx PATH $HOME/.scripts $PATH
+end
 
 alias p "cd"
 alias u "ls"
@@ -20,6 +25,13 @@ set -xg GCC_COLORS yes
 if [ -d "$HOME/.pyenv" ]
   set -gx PATH $PATH $HOME/.pyenv/bin
   status --is-interactive; and source (pyenv init - | psub); and source (pyenv virtualenv-init - | psub)
+end
+
+### Bootstrap fisherman
+if not functions -q fisher
+    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+    fish -c fisher
 end
 
 ### Sublime text auto-open .sublime-project files ###

@@ -66,7 +66,7 @@ def manual_install(name, site, to_check=None):
 
 
 def main():
-    cmds = {x.__name__: x for x in [all, base, scripts, fish, fisherman, pyenv, sublime_text]}
+    cmds = {x.__name__: x for x in [all, base, gitconfig, scripts, fish, fisherman, pyenv, sublime_text]}
     usage = "%s [%s] [--dry]" % (sys.argv[0], '|'.join(cmds.keys()))
     if len(sys.argv) == 1:
         raise SystemExit(usage)
@@ -82,6 +82,7 @@ def main():
 def all():
     base()
     scripts()
+    gitconfig()
     fish()
     fisherman()
     sublime_text()
@@ -105,6 +106,13 @@ def pyenv():
     if not DRY_RUN:
         print(' ✓')
 
+
+def gitconfig():
+    if not DRY_RUN:
+        print(' * gitconfig', end='', flush=True)
+    install_conf('.gitconfig')
+    if not DRY_RUN:
+        print(' ✓')
 
 def scripts():
     if not DRY_RUN:

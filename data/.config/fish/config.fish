@@ -1,6 +1,8 @@
 #set fish_greeting ""
 set -g fish_user_paths $fish_user_paths /snap/bin
 
+set -gx PATH $HOME/.scripts $PATH
+
 alias p "cd"
 alias u "ls"
 alias ul "ls -lh"
@@ -132,7 +134,7 @@ end
 
 # Display disk
 
-function disktree -d "git clone shortcut for GitHub repos"
+function disktree -d "Display directory usage"
   set -l path "."
 
   if count $argv > /dev/null

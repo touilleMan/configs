@@ -18,6 +18,11 @@ alias vpn 'cd ~/.config/vpn/eddie-ui_2.16.3_linux_x64_portable; and sudo ./eddie
 alias httpserver "twistd -no web --path=."
 alias wifuck 'sudo systemctl restart network-manager.service'
 
+# Fix GPG password prompt dialog for Windows subsystem for linux
+if [ (set -q WSLENV)
+  set -g GPG_TTY (tty)
+end
+
 # finally colour output for gcc !
 set -xg GCC_COLORS yes
 

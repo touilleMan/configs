@@ -32,6 +32,11 @@ if [ -d "$HOME/.pyenv" ]
   status --is-interactive; and source (pyenv init - | psub); and source (pyenv virtualenv-init - | psub)
 end
 
+# Rust
+if [ -d "$HOME/.cargo/bin" ]
+  set -gx PATH $HOME/.cargo/bin $PATH
+end
+
 ### Bootstrap fisherman
 if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config

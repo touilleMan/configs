@@ -19,7 +19,7 @@ alias httpserver "twistd -no web --path=."
 alias wifuck 'sudo systemctl restart network-manager.service'
 
 # Fix GPG password prompt dialog for Windows subsystem for linux
-if [ (set -q WSLENV)
+if [ (set -q WSLENV) ]
   set -g GPG_TTY (tty)
 end
 

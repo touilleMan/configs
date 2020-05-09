@@ -8,6 +8,18 @@ if [ -d "$HOME/.scripts" ]
   set -gx PATH $HOME/.scripts $PATH
 end
 
+if [ -d "$HOME/.cargo/bin" ]
+  set -gx PATH $HOME/.cargo/bin $PATH
+end
+
+if [ -d "$HOME/bin" ]
+  set -gx PATH $HOME/bin $PATH
+end
+
+if [ -x "/usr/bin/most" ]
+  set -gx PAGER most
+end
+
 alias p "cd"
 alias u "ls"
 alias ul "ls -lh"
@@ -88,7 +100,7 @@ if not set -q __git_abbrs_initialized__
   set -U __git_abbrs_initialized__
   echo -n Setting GIT abbreviations... 
 
-  abbr kk "kill %; and fg" # Not git but whatever...
+  abbr kk "kill %1; and fg" # Not git but whatever...
 
   abbr g "git"
   abbr ga "git add"
@@ -111,7 +123,7 @@ if not set -q __git_abbrs_initialized__
   abbr gm "git merge"
   abbr gco "git checkout"
   abbr gcb "git checkout -b"
-  abbr gb "git branch"
+  abbr gb "git branch --sort=-committerdate"
   abbr gbl "git blame"
   abbr gt "git tag"
   abbr gl 'git log'

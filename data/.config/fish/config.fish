@@ -27,6 +27,11 @@ else if type -q most
   set -gx PAGER most
 end
 
+if [ -d "$HOME/.pyenv" ]
+  set -gx PATH $PATH $HOME/.pyenv/bin
+  status --is-interactive; and source (pyenv init - | psub); and source (pyenv virtualenv-init - | psub)
+end
+
 alias p "cd"
 alias u "ls"
 alias ul "ls -lh"
@@ -35,7 +40,7 @@ alias ua "ls -lha"
 #alias vpn 'cd ~/.config/vpn; and sudo ./airvpn_linux_x64_portable/airvpn'
 alias vpn 'cd ~/.config/vpn/eddie-ui_2.16.3_linux_x64_portable; and sudo ./eddie-ui'
 alias httpserver "twistd -no web --path=."
-alias wifuck 'sudo systemctl restart network-manager.service'
+# alias wifuck 'sudo systemctl restart network-manager.service'
 
 # Fix GPG password prompt dialog for Windows subsystem for linux
 if [ (set -q WSLENV) ]
@@ -68,11 +73,11 @@ if [ -d "$HOME/.nvm" ]
 end
 
 ### Bootstrap fisherman
-if not functions -q fisher
-    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-    fish -c fisher
-end
+# if not functions -q fisher
+#     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+#     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+#     fish -c fisher
+# end
 
 ### Sublime text auto-open .sublime-project files ###
 

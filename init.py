@@ -144,7 +144,10 @@ def fish():
 def fisherman():
     if not DRY_RUN:
         print(' * fisherman plugins', end='', flush=True)
-    deps = ["edc/bass", "jethrokuan/git_porcelain"]
+    deps = [
+        "edc/bass",
+        # "jethrokuan/git_porcelain",
+    ]
     runcmd("fish -c 'fisher add %s'" % ' '.join(deps))
     if not DRY_RUN:
         print(' ✓')

@@ -2,6 +2,7 @@
 	email = emmanuel.leblond@gmail.com
 	name = Emmanuel Leblond
 	signingkey = 08B3DE7C93738156219ECA52C360860E645EFFC0
+	github = touilleMan
 [push]
 	default = simple
 [commit]

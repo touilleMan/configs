@@ -1,3 +1,4 @@
+
 #set fish_greeting ""
 
 if [ -d "/snap/bin" ]
@@ -12,11 +13,17 @@ if [ -d "$HOME/.cargo/bin" ]
   set -gx PATH $HOME/.cargo/bin $PATH
 end
 
+if [ -d "$HOME/.local/bin" ]
+  set -gx PATH $HOME/.local/bin $PATH
+end
+
 if [ -d "$HOME/bin" ]
   set -gx PATH $HOME/bin $PATH
 end
 
-if [ -x "/usr/bin/most" ]
+if type -q bat
+  set -gx PAGER bat
+else if type -q most
   set -gx PAGER most
 end
 
@@ -47,6 +54,17 @@ end
 # Rust
 if [ -d "$HOME/.cargo/bin" ]
   set -gx PATH $HOME/.cargo/bin $PATH
+end
+
+# nvm
+set NODE_VERSION v16.15.0
+if [ -d "$HOME/.nvm" ]
+  set -gx PATH $HOME/.nvm $PATH
+
+  if [ -d "$HOME/.nvm/versions/node/$NODE_VERSION" ]
+    set -gx PATH "$HOME/.nvm/versions/node/$NODE_VERSION/bin" $PATH
+  end
+
 end
 
 ### Bootstrap fisherman
@@ -89,7 +107,10 @@ function ve
   echo $venv_name
 
   if not test -d $venv_name
+    echo "Creating $venv_name..."
     eval $venv_p -m venv $venv_name
+    echo "Updating $venv_name..."
+    eval $venv_name/bin/python -m pip install -U pip setuptools wheel
   end
   . ./$venv_name/bin/activate.fish
 end
@@ -131,39 +152,6 @@ if not set -q __git_abbrs_initialized__
   abbr gll2 'git lg2'
 
   echo 'Done'
-end
-
-# stolen from https://github.com/joseluisq/gitnow
-# git clone shortcut for Github repos
-function gh -d "git clone shortcut for GitHub repos"
-  set -l repo
-
-  if count $argv > /dev/null
-    if test (count $argv) -gt 1
-      set repo $argv[1]/$argv[2]
-    else if echo $argv | grep -q -E '^([a-zA-Z0-9\_\-]+)\/([a-zA-Z0-9\_\-]+)$'
-      set repo $argv
-    else
-      set -l user (git config --global user.github)
-      set repo $user/$argv
-    end
-
-    git clone git@github.com:$repo.git
-  else
-    echo
-    echo "Repository name is required!"
-    echo "E.g: gh your-repo-name"
-    echo
-    echo "Usages:"
-    echo
-    echo "  a) gh username/repo-name"
-    echo "  b) gh username repo-name"
-    echo "  c) gh repo-name"
-    echo "     For this, it's necessary to set your Github username (login)"
-    echo "     to global config before. You can type: "
-    echo "     git config --global user.github \"your-github-username\""
-    echo
-  end
 end
 
 # Display disk
